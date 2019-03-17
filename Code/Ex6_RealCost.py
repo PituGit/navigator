@@ -38,7 +38,6 @@ def main():
 
     #------------------------------------------------------------------#
 
-
     #HEURISTIC 1 : TIME
     print("\n")
     timeCostTable=setCostTable(1, city)

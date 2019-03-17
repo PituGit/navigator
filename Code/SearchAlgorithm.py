@@ -81,6 +81,9 @@ class Node:
             self.h = 0
         elif(typePreference == 4):
             self.h = 1
+
+
+
     def setRealCost(self, costTable):
         """
         setRealCost: 	Calculates the real cost depending on the preference selected
@@ -88,6 +91,9 @@ class Node:
                  - costTable: DICTIONARY. Relates each station with their adjacency an their real cost. NOTE that this
                              cost can be in terms of any preference.
         """
+        
+
+
 
 
 def coord2station(coord, stationList):
@@ -156,13 +162,7 @@ def RemoveCycles(childrenList):
     
     listWithoutCycles = []
     for children in childrenList:
-        fatherList = []
-        father = children.father
-        while father:
-            fatherList.append(father.station.id)
-            father = father.father
-        
-        if children.station.id not in fatherList:
+        if children.station.id not in children.parentsID:
             listWithoutCycles.append(children)
 
     return listWithoutCycles
@@ -215,15 +215,26 @@ def setCostTable(typePreference, city):
             - costTable: DICTIONARY. Relates each station with their adjacency an their g, depending on the
                                  type of Preference Selected.
     """
-    if(typePreference==1):
-        Algo
-    elif(typePreference==2):
-        Algo
-    elif(typePreference==3):
-        Algo
-    elif(typePreference==4):
-        Algo
+   
+    costTable = {}
+    for station1 in city.StationList:
+        costTable[station1.id] = {}
+        for station2 in station1.destinationDic.keys():
+            if typePreference == 0 or typePreference == 4:
+                costTable[station1.id][station2] = 1
+            elif typePreference == 1:
+                costTable[station1.id][station2] = station1.destinationDic[station2]
+            elif typePreference == 2:
+                if station1.line == city.StationList[station2 - 1].line:
+                    costTable[station1.id][station2] = station1.destinationDic[station2 ] * city.velocity_lines[station1.line - 1]
+                else:
+                    costTable[station1.id][station2] = station1.destinationDic[station2] * city.walking_velocity
+            elif typePreference == 3:
+                if station1.line != city.StationList[station2 - 1].line:
+                    costTable[station1.id][station2] = 1
+    
     return costTable
+
 
 def AstarAlgorithm(coord_origin, coord_destination, typePreference, city, flag_redundants):
     """
