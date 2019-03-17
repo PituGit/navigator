@@ -1,0 +1,35 @@
+Canvis respecte a la versio 1 del codi que teniu a la web
+
+------------------- canvi 1 SearchAlgorithm linea 53
+    def setHeuristic(self, typePreference, node_destination, city):
+
+--- canvia a 
+
+    def setHeuristic(self, typePreference, station_destination, city):
+
+el parametre "desti" passa a ser un tipus "Station" en lloc de un tipus "Node"
+
+------------------- canvi 2 SearchAlgorithm linea 89
+def Expand(fatherNode, city, node_destination=None, typePreference=0, costTable=None):
+
+--- canvia a 
+def Expand(fatherNode, city, station_destination=None, typePreference=0, costTable=None):
+
+el parametre "desti" passa a ser un tipus "Station" en lloc de un tipus "Node"
+
+------------------- canvi 3 SearchAlgorithm linea 156
+def setCostTable(typePreference, stationList, city):
+
+--- canvia a 
+
+def setCostTable(typePreference, city):
+
+s'elimina el parametre stationList ja que està inclòs en city (city.StationList)
+
+------------------- canvi 4 SubwayMap.py linea 40
+s'ha afegit--->  self.walking_velocity = 4
+
+per poder calcular el temps a peu des de un punt del mapa a una estacio si el punt inicial o final no corresponen a una estació
+
+------------------- canvi 5 SubwayMap.py linea 56
+es suprimeix la lina:--->       i.destinationDic.update(connections[int(i.id)])
