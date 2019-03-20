@@ -163,6 +163,8 @@ def Expand(fatherNode, city, station_destination=None, typePreference=0, costTab
     for i in fatherNode.station.destinationDic.keys():
         childrenList.append(Node(city.StationList[i-1], fatherNode))
 
+    
+
     return childrenList
         
 
@@ -201,6 +203,19 @@ def RemoveRedundantPaths(childrenList, nodeList, partialCostTable):
                 - nodeList: LIST of NODES to be visited updated (without redundant paths)
                 - partialCostTable: DICTIONARY of the minimum g to get each key (Node) from the origin Node (updated)
     """
+
+    for child in childrenList:
+        if child.station.id in partialCostTable.keys():
+            if partialCostTable[child.station.id] > child.g:
+                partialCostTable[child.station.id] = child.g
+                if child in nodeList:
+                    nodeList.remove(child)
+            else:
+                childrenList.remove(child)
+        else:
+            partialCostTable[child.station.id] = child.g
+    
+    return childrenList, nodeList, partialCostTable
 
 
 def sorted_insertion(nodeList, childrenList):
