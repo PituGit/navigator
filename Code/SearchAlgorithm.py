@@ -161,9 +161,23 @@ def Expand(fatherNode, city, station_destination=None, typePreference=0, costTab
     
     childrenList = []
     for i in fatherNode.station.destinationDic.keys():
-        childrenList.append(Node(city.StationList[i-1], fatherNode))
+        child = Node(city.StationList[i-1], fatherNode)
 
-    
+        if costTable:
+            child.setRealCost(costTable)
+            child.setHeuristic(typePreference, station_destination, city)
+            child.setEvaluation()
+
+            if typePreference == 1:
+                child.time = child.g
+            elif typePreference == 2:
+                child.distance = child.g
+            elif typePreference == 3:
+                child.transfers = child.g
+            elif typePreference == 4:
+                child.num_stopStation = child.g
+
+        childrenList.append(child)    
 
     return childrenList
         
