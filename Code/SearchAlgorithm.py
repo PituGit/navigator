@@ -99,6 +99,14 @@ class Node:
                  - costTable: DICTIONARY. Relates each station with their adjacency an their real cost. NOTE that this
                              cost can be in terms of any preference.
         """
+
+        origin = self.father
+        destination = self
+        while origin:
+            self.g += costTable[origin.station.id][destination.station.id]
+
+            destination = origin
+            origin = origin.father
         
 
 
@@ -125,7 +133,7 @@ def coord2station(coord, stationList):
     possible_origins = []
     for station in distance:
         if station[1] == distance[0][1]:
-            possible_origins.append(station[0])
+            possible_origins.append(station[0] - 1)
   
     return possible_origins
 
@@ -236,7 +244,7 @@ def setCostTable(typePreference, city):
                 if station1.line == city.StationList[station2 - 1].line:
                     costTable[station1.id][station2] = station1.destinationDic[station2 ] * city.velocity_lines[station1.line - 1]
                 else:
-                    costTable[station1.id][station2] = station1.destinationDic[station2] * city.walking_velocity
+                    costTable[station1.id][station2] = 0
             elif typePreference == 3:
                 if station1.line != city.StationList[station2 - 1].line:
                     costTable[station1.id][station2] = 1
