@@ -50,6 +50,7 @@ class Node:
         setEvaluation: 	Calculates the Evaluation Function. Actualizes .f value
 
         """
+        self.f = self.g + self.h
 
     def setHeuristic(self, typePreference, station_destination, city):
         """"
@@ -126,7 +127,7 @@ def coord2station(coord, stationList):
 
     distance = []
     for station in stationList:
-        distance.append((station.id, math.sqrt(math.pow(station.x - coord[0],2) + math.pow(station.y - coord[1],2))))
+        distance.append((station.id-1, math.sqrt(math.pow(station.x - coord[0],2) + math.pow(station.y - coord[1],2))))
     
     distance.sort(key = lambda x: x[1])
 
@@ -214,6 +215,10 @@ def sorted_insertion(nodeList, childrenList):
         :returns
                 - nodeList: sorted LIST of NODES to be visited updated with the childrenList included
     """
+    for i in childrenList:
+        nodeList.append(i)
+    nodeList.sort(key = lambda x: x.f)
+    return nodeList
 
 
 def setCostTable(typePreference, city):
