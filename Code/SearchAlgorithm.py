@@ -1,7 +1,7 @@
 # This file contains all the required routines to make an A* search algorithm.
 #
 __authors__ = 'OscarLostes, EstevePineda, MaximoMartinez'
-__group__ = 'DL01'
+__group__ = 'DL15.08'
 # _________________________________________________________________________________________
 # Intel.ligencia Artificial
 # Grau en Enginyeria Informatica
@@ -64,25 +64,33 @@ class Node:
                 - station_destination: PATH of the destination station
                 - city: CITYINFO with the information of the city (see CityInfo class definition)
         """
-        distance = 0
-        x_coord = 0
-        y_coord = 0
+        
+        x_coord = ((self.station.x)-(station_destination.station.x))**2
+        y_coord = ((self.station.y)-(station_destination.station.y))**2
+        tmp = 0
+        var = False
+        distance = math.sqrt(x_coord+y_coord)
+
         if(typePreference == 1):
-            x_coord = ((self.station.x)-(station_destination.station.x))**2
-            y_coord = ((self.station.y)-(station_destination.station.y))**2
-            distance = math.sqrt(x_coord+y_coord)
-            self.h = distance / city.max_velocity
+            if (self.station.line != station_destination.station.line):
+                for j in city.StationList:
+                    for i in city.StationList:
+                        if(i.name == j.name and i.id != j.id and i.line != j.line and i.line == station_destination.station.line and var !=True):
+                            var = True
+                            tmp = city.StationList[j.id-1].destinationDic[i.id]
+                self.h = (distance / city.max_velocity) + tmp
+            else:
+                self.h = distance / city.max_velocity
         elif(typePreference == 2):
-            x_coord = ((self.station.x)-(station_destination.station.x))**2
-            y_coord = ((self.station.y)-(station_destination.station.y))**2
-            distance = math.sqrt(x_coord+y_coord)
             self.h = distance
         elif(typePreference == 3):
-            self.h = 0
+            if(self.station.line == station_destination.station.line):
+                self.h = 0
+            else:
+                self.h = 1
         elif(typePreference == 4):
-            self.h = 1
-
-
+            if(len(self.station.destinationDic) != 0):
+                self.h = 1
 
     def setRealCost(self, costTable):
         """

@@ -5,7 +5,7 @@
 # - Structure of the information
 #
 __authors__='OscarLostes, EstevePineda, MaximoMartinez'
-__group__='DL01'
+__group__='DL15.08'
 # _________________________________________________________________________________________
 # Intel.ligencia Artificial
 # Grau en Enginyeria Informatica
@@ -83,6 +83,7 @@ def search_multiple_lines(stationList):
                     else:
                         multipleLines[j.id] = []
                         multipleLines[j.id].append(i.id)
+
     return multipleLines
 	
 # readStationInformation: Given a filename, it reads the information of this file.
