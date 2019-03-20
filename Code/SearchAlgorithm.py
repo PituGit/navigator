@@ -101,6 +101,8 @@ class Node:
                              cost can be in terms of any preference.
         """
 
+        self.g = 0
+        
         origin = self.father
         destination = self
         while origin:
@@ -108,9 +110,6 @@ class Node:
 
             destination = origin
             origin = origin.father
-        
-
-
 
 
 def coord2station(coord, stationList):
@@ -241,7 +240,7 @@ def setCostTable(typePreference, city):
     for station1 in city.StationList:
         costTable[station1.id] = {}
         for station2 in station1.destinationDic.keys():
-            if typePreference == 0 or typePreference == 4:
+            if typePreference == 0:
                 costTable[station1.id][station2] = 1
             elif typePreference == 1:
                 costTable[station1.id][station2] = station1.destinationDic[station2]
@@ -253,6 +252,14 @@ def setCostTable(typePreference, city):
             elif typePreference == 3:
                 if station1.line != city.StationList[station2 - 1].line:
                     costTable[station1.id][station2] = 1
+                else:
+                    costTable[station1.id][station2] = 0
+            elif typePreference == 4:
+                if station1.name != city.StationList[station2 - 1].name:
+                    costTable[station1.id][station2] = 1
+                else:
+                    costTable[station1.id][station2] = 0
+
     
     return costTable
 
