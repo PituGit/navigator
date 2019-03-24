@@ -222,8 +222,9 @@ def RemoveRedundantPaths(childrenList, nodeList, partialCostTable):
         if child.station.id in partialCostTable.keys():
             if partialCostTable[child.station.id] > child.g:
                 partialCostTable[child.station.id] = child.g
-                if child in nodeList:
-                    nodeList.remove(child)
+                for node in nodeList:
+                    if child.station.id == node.station.id:
+                        nodeList.remove(node)
             else:
                 childrenList.remove(child)
         else:
