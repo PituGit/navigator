@@ -245,8 +245,7 @@ def sorted_insertion(nodeList, childrenList):
     """
     newNodeList = list(nodeList)
     for i in childrenList:
-        if i not in newNodeList: 
-            newNodeList.append(i)
+        newNodeList.append(i)
     newNodeList.sort(key = lambda x: x.f)
     return newNodeList
 
