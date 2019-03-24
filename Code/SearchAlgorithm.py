@@ -229,7 +229,6 @@ def RemoveRedundantPaths(childrenList, nodeList, partialCostTable):
                 childrenList.remove(child)
         else:
             partialCostTable[child.station.id] = child.g
-    
     return childrenList, nodeList, partialCostTable
 
 
@@ -355,11 +354,11 @@ def AstarAlgorithm(coord_origin, coord_destination, typePreference, city, flag_r
     #A*
     llista = [[nodeArrel]]
 
-    while (llista[0][-1].station.id != nodeObjectiu.station.id) or (llista == []):
-        c = llista[-1]
-        e = Expand(c[-1], city, nodeObjectiu, typePreference, costTable)
+    while (llista[0][0].station.id != nodeObjectiu.station.id) or (llista == []):
+        c = llista[0]
+        e = Expand(c[0], city, nodeObjectiu, typePreference, costTable)
         e = RemoveCycles(e)
-        llista.append(sorted_insertion(llista[-1], e))
+        llista.append(sorted_insertion(llista, e))
 
     if llista:
         #return time, distance, transfers,
