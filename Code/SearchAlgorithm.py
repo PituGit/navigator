@@ -333,7 +333,7 @@ def AstarAlgorithm(coord_origin, coord_destination, typePreference, city, flag_r
             min_distance_destination
     """
 
-    typePreference = int(typePreference)
+    """ typePreference = int(typePreference)
     
     costTable = setCostTable(typePreference, city)
 
@@ -367,4 +367,39 @@ def AstarAlgorithm(coord_origin, coord_destination, typePreference, city, flag_r
         #   min_distance_destination
         return 0.0, 0.0, 0, 0, 0, 0, [],  [1, 3, 5], 0.0, 0.0
     else:
-        return "No existeix solució"
+        return "No existeix solució" """
+
+    typePreference = int(typePreference)
+    partialCostTable = {} 
+    CostTable = setCostTable(typePreference, city)
+
+    NodeOrigen = Node(city.StationList[coord2station(coord_origin, city.StationList)[0] + 1], None)
+    NodeDesti = Node(city.StationList[coord2station(coord_destination, city.StationList)[0] + 1], None)
+    
+    NodeOrigen.setHeuristic(typePreference, NodeDesti, city) 
+    NodeOrigen.setRealCost(CostTable) 
+    NodeOrigen.setEvaluation()
+    
+    llista = [NodeOrigen]
+    
+    Nodo=llista[0]
+    nodosvi=[]
+    camioptim=[]
+    while ((Nodo.station.id != NodeDesti.station.id) or (llista == None)):         
+        c=llista.pop(0)
+        nodosvi.append(c.station.id)
+        
+        e = Expand(c, city, NodeDesti, typePreference, CostTable) 
+        e = RemoveCycles(e)
+        llista = sorted_insertion(llista, e)
+        
+        Nodo = llista[0]
+
+    nodosvi.append(Nodo.station.id)
+    camioptim = Nodo.parentsID[::-1]
+    camioptim.append(Nodo.station.id)
+    minorigen = math.sqrt ((coord_origin[0]-NodeOrigen.station.x) ** 2 + (coord_origin[1]-NodeOrigen.station.y) ** 2 )
+    mindesti = math.sqrt ((coord_destination[0]-NodeDesti.station.x) ** 2 + (coord_destination[1]-NodeDesti.station.y) ** 2 )
+   
+    return Nodo.time, Nodo.distance, Nodo.transfers, Nodo.num_stopStation, len(nodosvi), len(camioptim), nodosvi, camioptim, minorigen, mindesti
+
