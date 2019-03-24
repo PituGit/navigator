@@ -244,6 +244,8 @@ def sorted_insertion(nodeList, childrenList):
         :returns
                 - nodeList: sorted LIST of NODES to be visited updated with the childrenList included
     """
+    partialCostTable = {}
+    childrenList, nodeList, partialCostTable = RemoveRedundantPaths(childrenList, nodeList, partialCostTable)
     newNodeList = list(nodeList)
     for i in childrenList:
         newNodeList.append(i)
