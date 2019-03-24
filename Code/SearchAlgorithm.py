@@ -330,6 +330,30 @@ def AstarAlgorithm(coord_origin, coord_destination, typePreference, city, flag_r
             min_distance_destination
     """
 
+    typePreference = int(typePreference)
+    
+    costTable = setCostTable(typePreference, city)
 
+    idArrel = coord2station(coord_origin, city.StationList)[0]
+    idObjectiu = coord2station(coord_destination, city.StationList)[0]
+    
+    nodeArrel = Node(city.StationList[idArrel + 1], None)
+    nodeObjectiu = Node(city.StationList[idObjectiu + 1], None)
 
+    #A*
+    llista = [[nodeArrel]]
 
+    while (llista[0][0].station.id != nodeObjectiu.station.id) or (llista == [[]]):
+        c = llista[0]
+        e = Expand(c[0], city, nodeObjectiu, typePreference, costTable)
+        e = RemoveCycles(e)
+        llista.append(sorted_insertion(llista[0], e))
+
+    if llista:
+        #return time, distance, transfers,
+        #   stopStations, expanded_nodes, num_depth,
+        #   visited_nodes, idoptimalpath, min_distance_origin,
+        #   min_distance_destination
+        return 0.0, 0.0, 0, 0, 0, 0, [],  [1, 3, 5], 0.0, 0.0
+    else:
+        return "No existeix solució"
