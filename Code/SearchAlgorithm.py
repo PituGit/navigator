@@ -243,10 +243,12 @@ def sorted_insertion(nodeList, childrenList):
         :returns
                 - nodeList: sorted LIST of NODES to be visited updated with the childrenList included
     """
+    newNodeList = list(nodeList)
     for i in childrenList:
-        nodeList.append(i)
-    nodeList.sort(key = lambda x: x.f)
-    return nodeList
+        if i not in newNodeList: 
+            newNodeList.append(i)
+    newNodeList.sort(key = lambda x: x.f)
+    return newNodeList
 
 
 def setCostTable(typePreference, city):
@@ -340,14 +342,22 @@ def AstarAlgorithm(coord_origin, coord_destination, typePreference, city, flag_r
     nodeArrel = Node(city.StationList[idArrel + 1], None)
     nodeObjectiu = Node(city.StationList[idObjectiu + 1], None)
 
+    nodeArrel.setRealCost(costTable)
+    nodeArrel.setHeuristic(typePreference, nodeObjectiu, city)
+    nodeArrel.setEvaluation()
+
+    nodeObjectiu.setRealCost(costTable)
+    nodeObjectiu.setHeuristic(typePreference, nodeObjectiu, city)
+    nodeObjectiu.setEvaluation()
+
     #A*
     llista = [[nodeArrel]]
 
-    while (llista[0][0].station.id != nodeObjectiu.station.id) or (llista == [[]]):
-        c = llista[0]
-        e = Expand(c[0], city, nodeObjectiu, typePreference, costTable)
+    while (llista[0][-1].station.id != nodeObjectiu.station.id) or (llista == []):
+        c = llista[-1]
+        e = Expand(c[-1], city, nodeObjectiu, typePreference, costTable)
         e = RemoveCycles(e)
-        llista.append(sorted_insertion(llista[0], e))
+        llista.append(sorted_insertion(llista[-1], e))
 
     if llista:
         #return time, distance, transfers,
