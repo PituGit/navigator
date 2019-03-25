@@ -333,73 +333,43 @@ def AstarAlgorithm(coord_origin, coord_destination, typePreference, city, flag_r
             min_distance_destination
     """
 
-    """ typePreference = int(typePreference)
-    
+    typePreference = int(typePreference)
     costTable = setCostTable(typePreference, city)
 
-    idArrel = coord2station(coord_origin, city.StationList)[0]
-    idObjectiu = coord2station(coord_destination, city.StationList)[0]
+    originId = coord2station(coord_origin, city.StationList)[0] + 1
+    destId = coord2station(coord_destination, city.StationList)[0] + 1
+
+    nodeOrigin = Node(city.StationList[originId], None)
+    nodeDest = Node(city.StationList[destId], None)
     
-    nodeArrel = Node(city.StationList[idArrel + 1], None)
-    nodeObjectiu = Node(city.StationList[idObjectiu + 1], None)
-
-    nodeArrel.setRealCost(costTable)
-    nodeArrel.setHeuristic(typePreference, nodeObjectiu, city)
-    nodeArrel.setEvaluation()
-
-    nodeObjectiu.setRealCost(costTable)
-    nodeObjectiu.setHeuristic(typePreference, nodeObjectiu, city)
-    nodeObjectiu.setEvaluation()
-
-    #A*
-    llista = [[nodeArrel]]
-
-    while (llista[0][0].station.id != nodeObjectiu.station.id) or (llista == []):
-        c = llista[0]
-        e = Expand(c[0], city, nodeObjectiu, typePreference, costTable)
-        e = RemoveCycles(e)
-        llista.append(sorted_insertion(llista, e))
-
-    if llista:
-        #return time, distance, transfers,
-        #   stopStations, expanded_nodes, num_depth,
-        #   visited_nodes, idoptimalpath, min_distance_origin,
-        #   min_distance_destination
-        return 0.0, 0.0, 0, 0, 0, 0, [],  [1, 3, 5], 0.0, 0.0
-    else:
-        return "No existeix solució" """
-
-    typePreference = int(typePreference)
-    partialCostTable = {} 
-    CostTable = setCostTable(typePreference, city)
-
-    NodeOrigen = Node(city.StationList[coord2station(coord_origin, city.StationList)[0] + 1], None)
-    NodeDesti = Node(city.StationList[coord2station(coord_destination, city.StationList)[0] + 1], None)
+    nodeOrigin.setHeuristic(typePreference, nodeDest, city) 
+    nodeOrigin.setRealCost(costTable) 
+    nodeOrigin.setEvaluation()
     
-    NodeOrigen.setHeuristic(typePreference, NodeDesti, city) 
-    NodeOrigen.setRealCost(CostTable) 
-    NodeOrigen.setEvaluation()
+    llista = [nodeOrigin]
     
-    llista = [NodeOrigen]
+    nodeActual = llista[0]
+    nodesVisitats = []
+    idOptimalPath = []
     
-    Nodo=llista[0]
-    nodosvi=[]
-    camioptim=[]
-    while ((Nodo.station.id != NodeDesti.station.id) or (llista == None)):         
-        c=llista.pop(0)
-        nodosvi.append(c.station.id)
-        
-        e = Expand(c, city, NodeDesti, typePreference, CostTable) 
+    while (nodeActual.station.id != nodeDest.station.id) or (llista == None):         
+        c = llista.pop(0)
+        nodesVisitats.append(c.station.id)
+        e = Expand(c, city, nodeDest, typePreference, costTable) 
         e = RemoveCycles(e)
         llista = sorted_insertion(llista, e)
         
-        Nodo = llista[0]
+        nodeActual = llista[0]
 
-    nodosvi.append(Nodo.station.id)
-    camioptim = Nodo.parentsID[::-1]
-    camioptim.append(Nodo.station.id)
-    minorigen = math.sqrt ((coord_origin[0]-NodeOrigen.station.x) ** 2 + (coord_origin[1]-NodeOrigen.station.y) ** 2 )
-    mindesti = math.sqrt ((coord_destination[0]-NodeDesti.station.x) ** 2 + (coord_destination[1]-NodeDesti.station.y) ** 2 )
+    nodesVisitats.append(nodeActual.station.id)
+
+    idOptimalPath = nodeActual.parentsID
+    idOptimalPath.reverse()
+    idOptimalPath.append(nodeActual.station.id)
+
+
+    minDistOrigen = math.sqrt(math.pow(coord_origin[0] - nodeOrigin.station.x, 2) + math.pow(coord_origin[1] - nodeOrigin.station.y, 2))
+    minDistDest = math.sqrt(math.pow(coord_destination[0] - nodeDest.station.x, 2) + math.pow(coord_destination[1] - nodeDest.station.y, 2))
    
-    return Nodo.time, Nodo.distance, Nodo.transfers, Nodo.num_stopStation, len(nodosvi), len(camioptim), nodosvi, camioptim, minorigen, mindesti
+    return nodeActual.time, nodeActual.distance, nodeActual.transfers, nodeActual.num_stopStation, len(nodesVisitats), len(idOptimalPath), nodesVisitats, idOptimalPath, minDistOrigen, minDistDest
 
