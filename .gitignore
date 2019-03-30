@@ -1,2 +1,7 @@
 .vscode/
 Code/__pycache__/
+memoria/Memoria.aux
+memoria/Memoria.fdb_latexmk
+memoria/Memoria.fls
+memoria/Memoria.log
+memoria/Memoria.synctex.gz
