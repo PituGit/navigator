@@ -1,0 +1,13 @@
+\contentsline {section}{\numberline {1}Introducci\IeC {\'o}}{3}% 
+\contentsline {section}{\numberline {2}Treball previ a implementar l'algoritme \textit {A*}}{4}% 
+\contentsline {subsection}{\numberline {2.1}Exercici 2 - Expansi\IeC {\'o} d\IeC {\textquoteright }un node}{4}% 
+\contentsline {subsection}{\numberline {2.2}Exercici 3 - Eliminar Cicles}{4}% 
+\contentsline {subsection}{\numberline {2.3}Exercici 4 - Trobar l\IeC {\textquoteright }estaci\IeC {\'o} m\IeC {\'e}s propera}{4}% 
+\contentsline {subsection}{\numberline {2.4}Exercici 6 - Cost}{5}% 
+\contentsline {subsubsection}{\numberline {2.4.1}Taula de costos}{5}% 
+\contentsline {subsubsection}{\numberline {2.4.2}Cost real d\IeC {\textquoteright }un node}{6}% 
+\contentsline {subsection}{\numberline {2.5}Exercici 7 - Heur\IeC {\'\i }stiques}{6}% 
+\contentsline {subsection}{\numberline {2.6}Exercici 8 - Funci\IeC {\'o} heur\IeC {\'\i }stica global}{7}% 
+\contentsline {subsection}{\numberline {2.7}Exercici 9 - Inserci\IeC {\'o} ordenada}{7}% 
+\contentsline {subsection}{\numberline {2.8}Exercici 10 - Eliminar Camins Redundants}{8}% 
+\contentsline {section}{\numberline {3}Implementant \textit {A*}}{9}% 
