@@ -101,15 +101,7 @@ class Node:
                              cost can be in terms of any preference.
         """
 
-        self.g = 0
-        
-        origin = self.father
-        destination = self
-        while origin:
-            self.g += costTable[origin.station.id][destination.station.id]
-
-            destination = origin
-            origin = origin.father
+        self.g = (self.father.g or 0) + costTable[self.father.station.id][self.station.id]
 
 
 def coord2station(coord, stationList):

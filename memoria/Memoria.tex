@@ -1,0 +1,73 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{blindtext}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{parskip}
+\usepackage{microtype}
+
+\parskip 12pt
+
+\begin{document}
+
+    \title{\Large{\textbf{Projecte 1: Navegació}}}
+    \author{Oscar Lostes Cazorla\\ Esteve Sánchez Pineda\\ Máximo Martínez Alcívar}
+    \date{31 de Març, 2019}
+
+
+    \maketitle
+    \let\cleardoublepage\clearpage
+
+    \pagebreak
+
+    \section*{Introducció}
+
+    L’objectiu d’aquesta pràctica és resoldre un problema ben habitual: com arribar del punt A al B de la millor forma possible. A diari emprem eines com Google Maps per aquesta finalitat, i el que volem és fer una petita réplica aplicant els coneixements apresos a classe.
+    
+    El nostre programa ens permet carregar la informació de la xarxa de metro (total o parcial) d’una ciutat, i trobar la ruta óptima entre dos punts de la mateixa. Establim diversos criteris d’optimitat com poden ser a arribar el més aviat possible, agafar el camí més curt, fer pocs transbords o passar per poques parades. Per a cada criteri, associem una heurística (una funció que fa una predicció optimista sobre el futur) que ens servirà a l’hora de calcular la ruta. La informació de la xarxa de metro, expressada en diversos fitxers de text, la convertirem en una representació en nodes, que contindran la informació de cada estació, i que esdevindran l’arbre a recórrer per A*
+    Donades unes coordenades o estacions d'origen i destí, i tenint en compte els criteris anteriors, el programa aplicarà l’algoritme A* après a classe per a realitzar una cerca informada per tal d’obtenir la ruta desitjada.
+
+    Per tal d’arribar a aquest programa desitjat, anirem programant diverses funcions intermitges que després integrarem per a implementar l’algoritme A*, i que anirem explicant al llarg d’aquesta memòria.
+    \begin{itemize}
+        \item Expansió d’un node.
+        \item Eliminació de cicles.
+        \item Obtenir l’estació més propera donades unes coordenades.
+        \item Establir la matriu de costos i el cost real d’un node.
+        \item Establir heuristiques i funcions heurístiques globals.
+        \item Inserció ordenada d’un node en una llista.
+        \item Eliminació de camins redundants.
+    \end{itemize}
+
+    Per últim, tot l’anàlisi del programa descrit en aquesta memòria, així com els possibles exemples, imatges o figures, es bassen en en el mapa de la xarxa de metro de la ciutat francesa de Lyon, tot i que el programa és vàlid per a qualsevol xarxa de metro.
+
+    % FOTOS MAPA METRO LYON
+
+    \pagebreak
+
+    \section*{Treball previ a implementar A*}
+
+    \subsection*{Exercici 2 - Expansió d’un node}
+
+    Un primer pas per al nostre algoritme és expandir un node. Expandir vol dir que, donat un node, volem obtenir una llista amb els seus fills. Això, traduït a l’esquema de metro, ens diu a quines estacions podem anar des d’una estació donada, i per tant ens serveix per avançar per la xarxa.
+    Cada node conté una llista amb els ID de les estacions adjacents. Si iterem sobre aquesta llista, podem construir-ne una nova amb els nodes que representen aquestes estacions, establint el node original com a pare, i acudint a la informació de la xarxa de metro per a obtenir les dades concretes de la estació (a partir de l’ID).
+    Podem anar repetint aquesta expansió de forma cíclica, emprant els criteris adequats i filtrant-la amb les funcions pertinents, fins a formar una llista que acabarà esdevenint el camí òptim.
+
+    A la vegada, aprofitem per establir certs valors addicionals de cada node, i que veurem més endavant, com son el cost real d’arribar fins al node, el cost heurístic i la funció d'avaluació. Aquest valors tenen molta importància a l’algoritme, i per tant han de ser inclosos en tots els nodes.
+
+    % IMAGEN EJEMPLO EXPANSION LYON
+
+    \subsection*{Exercici 3 - Eliminar Cicles}
+
+    Quan expandim un node, creem la llista amb totes les estacions adjacents. Això ens pot portar a situacions on, a la llista de fills, ens apareguin nodes ja expandits anteriorment. A aquest fenomen en diem cicle, i els cicles són contraproduents per al nostre algoritme, ja que el porta a entrar en bucles de camins (podem dir, que comença a fer voltes en cercles). És evident que un camí òptim no passa per aquest escenari, i per tant l’hem d’eliminar.
+
+    Tots els nodes contenen una llista amb els ID de les estacions pare. Amb aquesta informació podem saber quins nodes son un cicle en una llista de nodes. Si per cada node de la llista, iterem sobre el conjunt d’IDs de pares, podem eliminar de la lista aquelles estacions que formen part del conjunt, deixant així la llista neta de cicles.
+
+    % IMAGEN EJEMPLO QUE ES UN CICLO
+    % IMAGEN EJEMPLO ELIMINAR CICLO LYON
+
+
+
+\end{document}
