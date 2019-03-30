@@ -92,6 +92,8 @@ class Node:
         elif(typePreference == 4):
             if(len(self.station.destinationDic) != 0):
                 self.h = 1
+            else:
+                self.h = 0
 
     def setRealCost(self, costTable):
         """
