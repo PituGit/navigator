@@ -1,0 +1,14 @@
+\BOOKMARK [0][-]{part.1}{I Introducci\363}{}% 1
+\BOOKMARK [0][-]{part.2}{II Treball previ a implementar l'algoritme A*}{}% 2
+\BOOKMARK [1][-]{section.1}{Exercici 2 - Expansi\363 d\220un node}{part.2}% 3
+\BOOKMARK [1][-]{section.2}{Exercici 3 - Eliminar Cicles}{part.2}% 4
+\BOOKMARK [1][-]{section.3}{Exercici 4 - Trobar l\220estaci\363 m\351s propera}{part.2}% 5
+\BOOKMARK [1][-]{section.4}{Exercici 6 - Cost}{part.2}% 6
+\BOOKMARK [2][-]{subsection.4.1}{Taula de costos}{section.4}% 7
+\BOOKMARK [2][-]{subsection.4.2}{Cost real d\220un node}{section.4}% 8
+\BOOKMARK [1][-]{section.5}{Exercici 7 - Heur\355stiques}{part.2}% 9
+\BOOKMARK [1][-]{section.6}{Exercici 8 - Funci\363 heur\355stica global}{part.2}% 10
+\BOOKMARK [1][-]{section.7}{Exercici 9 - Inserci\363 ordenada}{part.2}% 11
+\BOOKMARK [1][-]{section.8}{Exercici 10 - Eliminar Camins Redundants}{part.2}% 12
+\BOOKMARK [0][-]{part.3}{III Implementant A*}{}% 13
+\BOOKMARK [0][-]{part.4}{IV Conclusi\363}{}% 14

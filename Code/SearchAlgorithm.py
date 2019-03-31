@@ -102,8 +102,9 @@ class Node:
                  - costTable: DICTIONARY. Relates each station with their adjacency an their real cost. NOTE that this
                              cost can be in terms of any preference.
         """
-
-        self.g = (self.father.g or 0) + costTable[self.father.station.id][self.station.id]
+        self.g = 0
+        if self.father:
+            self.g = self.father.g + costTable[self.father.station.id][self.station.id]
 
 
 def coord2station(coord, stationList):

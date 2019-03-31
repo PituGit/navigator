@@ -1,13 +1,15 @@
-\contentsline {section}{\numberline {1}Introducci\IeC {\'o}}{3}% 
-\contentsline {section}{\numberline {2}Treball previ a implementar l'algoritme \textit {A*}}{4}% 
-\contentsline {subsection}{\numberline {2.1}Exercici 2 - Expansi\IeC {\'o} d\IeC {\textquoteright }un node}{4}% 
-\contentsline {subsection}{\numberline {2.2}Exercici 3 - Eliminar Cicles}{4}% 
-\contentsline {subsection}{\numberline {2.3}Exercici 4 - Trobar l\IeC {\textquoteright }estaci\IeC {\'o} m\IeC {\'e}s propera}{4}% 
-\contentsline {subsection}{\numberline {2.4}Exercici 6 - Cost}{5}% 
-\contentsline {subsubsection}{\numberline {2.4.1}Taula de costos}{5}% 
-\contentsline {subsubsection}{\numberline {2.4.2}Cost real d\IeC {\textquoteright }un node}{6}% 
-\contentsline {subsection}{\numberline {2.5}Exercici 7 - Heur\IeC {\'\i }stiques}{6}% 
-\contentsline {subsection}{\numberline {2.6}Exercici 8 - Funci\IeC {\'o} heur\IeC {\'\i }stica global}{7}% 
-\contentsline {subsection}{\numberline {2.7}Exercici 9 - Inserci\IeC {\'o} ordenada}{7}% 
-\contentsline {subsection}{\numberline {2.8}Exercici 10 - Eliminar Camins Redundants}{8}% 
-\contentsline {section}{\numberline {3}Implementant \textit {A*}}{9}% 
+\babel@toc {catalan}{}
+\contentsline {part}{I\hspace {1em}Introducci\IeC {\'o}}{2}{part.1}% 
+\contentsline {part}{II\hspace {1em}Treball previ a implementar l'algoritme \textit {A*}}{4}{part.2}% 
+\contentsline {section}{\numberline {1}Exercici 2 - Expansi\IeC {\'o} d\IeC {\textquoteright }un node}{4}{section.1}% 
+\contentsline {section}{\numberline {2}Exercici 3 - Eliminar Cicles}{5}{section.2}% 
+\contentsline {section}{\numberline {3}Exercici 4 - Trobar l\IeC {\textquoteright }estaci\IeC {\'o} m\IeC {\'e}s propera}{5}{section.3}% 
+\contentsline {section}{\numberline {4}Exercici 6 - Cost}{6}{section.4}% 
+\contentsline {subsection}{\numberline {4.1}Taula de costos}{6}{subsection.4.1}% 
+\contentsline {subsection}{\numberline {4.2}Cost real d\IeC {\textquoteright }un node}{7}{subsection.4.2}% 
+\contentsline {section}{\numberline {5}Exercici 7 - Heur\IeC {\'\i }stiques}{7}{section.5}% 
+\contentsline {section}{\numberline {6}Exercici 8 - Funci\IeC {\'o} heur\IeC {\'\i }stica global}{8}{section.6}% 
+\contentsline {section}{\numberline {7}Exercici 9 - Inserci\IeC {\'o} ordenada}{9}{section.7}% 
+\contentsline {section}{\numberline {8}Exercici 10 - Eliminar Camins Redundants}{9}{section.8}% 
+\contentsline {part}{III\hspace {1em}Implementant \textit {A*}}{11}{part.3}% 
+\contentsline {part}{IV\hspace {1em}Conclusi\IeC {\'o}}{13}{part.4}% 
